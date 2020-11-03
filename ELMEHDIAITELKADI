@@ -1,0 +1,76 @@
+EX 1 :
+
+declare 
+   v_nom      VARCHAR2(20);
+   v_prenom   VARCHAR2(20);
+begin 
+     v_nom:='$v_nom';
+     v_prenom:='$v_prenom';  
+     DBMS_OUTPUT.PUT_LINE('NOM : ' || v_nom);
+     DBMS_OUTPUT.PUT_LINE('Adresse= ' || v_prenom);
+end;
+
+23-4- select count(*) from Employees
+
+DECLARE
+v-NTOTAL INTEGER; -- Nombre total d’employés
+v-NTOTAL1 INTEGER; -- Nombre total d'employés dont manager_ID=1
+v-prop REAL;
+BEGIN
+SELECT COUNT(*) INTO v-NTOTAL FROM Employees;
+
+SELECT COUNT(*) INTO v-NTOTAL1 FROM Employees WHERE MANAGER_ID = 1;
+
+DBMS_OUTPUT.PUT_LINE('Le nomrbe totale des employes = ' || v-NTOTAL);
+
+DBMS_OUTPUT.PUT_LINE('Le nomrbe totale des employes dont manager_id1 = ' || v-NTOTAL1);
+
+v-prop := 100 * v-NTOTAL1/v-NTOTAL ;
+DBMS_OUTPUT.PUT_LINE('Proportion de managers = ' || v-prop || ' %');
+
+END;
+5-
+    declare
+      v_last_name Employee.LAST_NAME%TYPE;
+      v_first_name Employee.FIRST_NAME%TYPE;
+      v_hire_date   Employee.HIRE_DATE%TYPE;
+    begin
+       select LAST_NAME,FIRST_NAME,HIRE_DATE into v_last_name, v_first_name,v_hire_date
+       from Employee where MANAGER_ID= '$MANAGER_ID';
+       DBMS_OUTPUT.PUT_LINE('FIRST NAME = ' || v_first_name);
+       DBMS_OUTPUT.PUT_LINE('LAST NAME = ' || v_last_name);
+       DBMS_OUTPUT.PUT_LINE('HIRE DATE = ' || v_hire_date);
+ 
+    end;
+
+6- 
+declare
+  TYPE employe 
+   IS RECORD (
+      v_last_name Employee.LAST_NAME%TYPE,
+      v_first_name Employee.FIRST_NAME%TYPE,
+      v_hire_date   Employee.HIRE_DATE%TYPE );
+   v-employee employe;
+begin 
+    select LAST_NAME, FIRST_NAME, HIRE_DATE into  employe.v_last_name, employe.v_first_name, employe.v_hire_date
+    from employee
+    where  where MANAGER_ID= '$MANAGER_ID';
+       DBMS_OUTPUT.PUT_LINE('FIRST NAME = ' || v_first_name);
+       DBMS_OUTPUT.PUT_LINE('LAST NAME = ' || v_last_name);
+       DBMS_OUTPUT.PUT_LINE('HIRE DATE = ' || v_hire_date);
+end;
+
+ 
+7- 
+ declare
+   Recproduct Products%ROWTYPE;
+begin
+   select *  into Recproduct
+   from Products where PRODUCT_ID='$PRODUCT_ID ';
+   DBMS_OUTPUT.PUT_LINE('les information du produit : '|| Recproduct);
+end;
+ 
+ 
+
+
+
